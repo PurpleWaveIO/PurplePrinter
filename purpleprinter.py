@@ -4,7 +4,7 @@ import ldap
 app = Flask(__name__,template_folder='templates')
 
 # LDAP configuration
-LDAP_SERVER = 'ldap://192.168.1.71'
+LDAP_SERVER = 'ldap://{ip_address}'
 LDAP_PORT = 389
 LDAP_DOMAIN = 'example.com'
 LDAP_SEARCH_BASE = 'ou=users,dc=example,dc=com'
