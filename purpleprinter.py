@@ -33,7 +33,15 @@ def ldap_lookup():
 
         return render_template('result.html', ldap_attributes=ldap_attributes)
 
-    return render_template('index.html')
+    return render_template('status.html')
+
+@app.route('/config')
+def config_page():
+    return render_template('config.html')
+
+@app.route('/status')
+def status_page():
+    return render_template('status.html')
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host='0.0.0.0')
