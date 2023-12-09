@@ -1,24 +1,23 @@
 from flask import Flask, render_template, request
 import ldap
 
-app = Flask(__name__,template_folder='templates')
+app = Flask(__name__)
 
 # LDAP configuration
-LDAP_SERVER = 'ldap://{ip_address}'
 LDAP_PORT = 389
-LDAP_DOMAIN = 'example.com'
+LDAP_DOMAIN = 'your_ldap_domain'  # e.g. 'example.com'
 LDAP_SEARCH_BASE = 'ou=users,dc=example,dc=com'
 
 @app.route('/', methods=['GET', 'POST'])
-
 def ldap_lookup():
     if request.method == 'POST':
         ip_address = request.form.get('ip_address')
         username = request.form.get('username')
         password = request.form.get('password')
 
-        # Construct the LDAP URL
-        ldap_url = f"{LDAP_SERVER}:{LDAP_PORT}"
+        # Construct the LDAP URL with user-supplied IP address
+        ldap_server = f"ldap://{ip_address}"
+        ldap_url = f"{ldap_server}:{LDAP_PORT}"
         ldap_conn = ldap.initialize(ldap_url)
         ldap_conn.protocol_version = 3
 
@@ -34,15 +33,7 @@ def ldap_lookup():
 
         return render_template('result.html', ldap_attributes=ldap_attributes)
 
-    return render_template('status.html')
-
-@app.route('/config')
-def config_page():
-    return render_template('config.html')
-
-@app.route('/status')
-def status_page():
-    return render_template('status.html')
+    return render_template('index.html')
 
 if __name__ == '__main__':
-    app.run(debug=True, port=5000, host='0.0.0.0')
+    app.run(debug=True)
