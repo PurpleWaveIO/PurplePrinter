@@ -1,19 +1,29 @@
-from flask import Flask, render_template, request
+from flask import Flask, render_template, request, redirect, url_for, send_from_directory
 import ldap
 
 app = Flask(__name__)
 
 # LDAP configuration
 LDAP_PORT = 389
-LDAP_DOMAIN = 'your_ldap_domain'  # e.g. 'example.com'
-LDAP_SEARCH_BASE = 'ou=users,dc=example,dc=com'
+LDAP_DOMAIN = 'purpleteam.academy'  # e.g. 'example.com'
+LDAP_SEARCH_BASE = 'ou=users,dc=purpleteam,dc=academy'
 
+# Route for handling the login page logic
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    error = None
+    if request.method == 'POST':
+        if request.form['username'] != 'admin' or request.form['password'] != 'admin':
+            error = 'Invalid Credentials. Please try again.'
+        else:
+            return redirect(url_for('status_page'))
+    return render_template('login.html', error=error)
+
+#Route for handling LDAP request
 @app.route('/', methods=['GET', 'POST'])
 def ldap_lookup():
     if request.method == 'POST':
         ip_address = request.form.get('ip_address')
-        username = request.form.get('username')
-        password = request.form.get('password')
 
         # Construct the LDAP URL with user-supplied IP address
         ldap_server = f"ldap://{ip_address}"
@@ -22,7 +32,7 @@ def ldap_lookup():
         ldap_conn.protocol_version = 3
 
         # Bind to the LDAP server
-        ldap_conn.simple_bind_s(f"{username}@{LDAP_DOMAIN}", password)
+        ldap_conn.simple_bind_s('purpleprinter@purpleteam.academy', 'Hacker30')
 
         # Perform the LDAP search
         search_filter = f"(host={ip_address})"
@@ -33,15 +43,23 @@ def ldap_lookup():
 
         return render_template('result.html', ldap_attributes=ldap_attributes)
 
-    return render_template('status.html')
+    return render_template('config.html')
 
+#Route for Config page
 @app.route('/config')
 def config_page():
     return render_template('config.html')
 
+#Route for Status page
 @app.route('/status')
 def status_page():
     return render_template('status.html')
 
+#Route for Paper / Tray page
+@app.route('/tray')
+def tray_page():
+    return render_template('tray.html')
+
+#Enable built in web server and debug
 if __name__ == '__main__':
     app.run(debug=True, port=5000, host='0.0.0.0')
