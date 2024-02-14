@@ -2,7 +2,7 @@
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-		<title>2 Column Layout &mdash; Left Menu</title>
+		<title>PurpleJet Pro</title>
 		<style type="text/css">
 		
 			body{
@@ -65,7 +65,7 @@
 			<main>
 				<div id="content">
 					<div class="innertube">
-						<h1>PurpleJet Config Menu</h1>
+						<h1>PurpleJet Pro 5000 Config Menu</h1>
 						<table border="1" cellpadding="1" cellspacing="1" style="width:500px">
 							<tbody>
 								<tr>
@@ -74,7 +74,7 @@
 								</tr>
 								<tr>
 									<td>IP Address</td>
-									<td>192.168.1.50</td>
+									<td>10.0.0.50</td>
 								</tr>
 								<tr>
 									<td>Subnet</td>
@@ -84,11 +84,11 @@
 								</tr>
 								<tr>
 									<td>DNS</td>
-									<td>192.168.1.10</td>
+									<td>10.0.0.5</td>
 								</tr>
 								<tr>
 									<td>Gateway</td>
-									<td>192.168.1.1</td>
+									<td>10.0.0.1</td>
 								</tr>
 							</tbody>
 						</table>
@@ -98,15 +98,11 @@
                	<form method="post" action="/">
                 <label for="ip_address">Active Directory IP Address:</label>
                 <input type="text" id="ip_address" name="ip_address" required><br>
-
-                <label for="username">Username:</label>
-                <input type="text" id="username" name="username" required><br>
-
-                <label for="password">Password:</label>
-                <input type="password" id="password" name="password" required><br>
-
-                 <input type="submit" value="Search">
-               </form>
+		<input type="submit" value="Test">
+		</form>
+			<p>Username: purpleprinter</p>
+			<p>Password: ***********</p>
+			<p>LDAP Port: 389</p>
               </div>
             </div>
           </main>
@@ -116,12 +112,14 @@
 				<div class="innertube">
 					<h3>Menu</h3>
 					<ul>
-						<li><a href="status">Status</a></li>
-            			<li><a href="config">Device Config</a></li>
+						<li><u><a href="status">Status</a></u></li>
+		            			<li><u><a href="tray">Paper Tray</a></u></li>
+						<li><u><a href="config">Device Config</a></u></li>
 					</ul>
 				</div>
 			</nav>
 			
 		</div>
 	</body>
+<link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
 </html>
