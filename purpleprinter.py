@@ -5,8 +5,8 @@ app = Flask(__name__)
 
 # LDAP configuration
 LDAP_PORT = 389
-LDAP_DOMAIN = 'purpleteam.academy'  # e.g. 'example.com'
-LDAP_SEARCH_BASE = 'ou=users,dc=purpleteam,dc=academy'
+LDAP_DOMAIN = 'local.domain'  # e.g. 'example.com'
+LDAP_SEARCH_BASE = 'ou=users,dc=local,dc=domain'
 
 # Route for handling the login page logic
 @app.route('/login', methods=['GET', 'POST'])
@@ -31,8 +31,8 @@ def ldap_lookup():
         ldap_conn = ldap.initialize(ldap_url)
         ldap_conn.protocol_version = 3
 
-        # Bind to the LDAP server
-        ldap_conn.simple_bind_s('purpleprinter@purpleteam.academy', 'Hacker30')
+        # Bind to the LDAP server. Change User and Password here that you want to capture
+        ldap_conn.simple_bind_s('USERNAME@DOMAIN.LOCAL', 'PASSWORD')
 
         # Perform the LDAP search
         search_filter = f"(host={ip_address})"
