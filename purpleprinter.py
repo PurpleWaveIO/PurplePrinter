@@ -32,7 +32,7 @@ def ldap_lookup():
         ldap_conn.protocol_version = 3
 
         # Bind to the LDAP server. Change User and Password here that you want to capture
-        ldap_conn.simple_bind_s('USERNAME@DOMAIN.LOCAL', 'PASSWORD')
+        ldap_conn.simple_bind_s('USERNAME', 'PASSWORD')
 
         # Perform the LDAP search
         search_filter = f"(host={ip_address})"
