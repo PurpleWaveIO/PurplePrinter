@@ -17,3 +17,9 @@ Use:</br>
 -Login page to save credentials from enumeration/discovery/browser dumps: http://IP:5000/login</br>
 -Default Credentials: admin/admin</br>
 -Capture Credentials: http://IP:5000/config, on attacking host "nc -lvnp 389", enter attacker IP in Active Directory IP Address field and select the Test button</br>
+
+Docker:</br>
+-git clone https://github.com/PurpleWaveIO/PurplePrinter</br>
+-cd PurplePrinter</br>
+-sudo docker build -t purpleprinter:lastest .</br>
+-sudo docker run -p 5000:5000 -d purpleprinter:latest</br>
